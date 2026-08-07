@@ -125,15 +125,33 @@ async function loadRepos() {
 }
 
 // ── Contact form ─────────────────────────────────────────────
-document.getElementById('contact-form').addEventListener('submit', function (e) {
+document.getElementById('contact-form').addEventListener('submit', async function (e) {
   e.preventDefault();
   const status = document.getElementById('form-status');
+  const btn = this.querySelector('button[type="submit"]');
   const name = document.getElementById('f-name').value.trim();
 
-  // Simulated send (replace with EmailJS or Formspree later)
-  status.textContent = `Merci ${name} ! Je vous répondrai dès que possible.`;
-  this.reset();
-  setTimeout(() => { status.textContent = ''; }, 5000);
+  btn.disabled = true;
+  status.textContent = 'Envoi en cours…';
+
+  try {
+    const res = await fetch('https://formspree.io/f/mvkpgbkp', {
+      method: 'POST',
+      headers: { 'Accept': 'application/json' },
+      body: new FormData(this),
+    });
+    if (res.ok) {
+      status.textContent = `Merci ${name} ! Je vous répondrai dès que possible.`;
+      this.reset();
+    } else {
+      status.textContent = 'Erreur lors de l\'envoi. Réessayez ou contactez-moi par email.';
+    }
+  } catch {
+    status.textContent = 'Erreur réseau. Vérifiez votre connexion et réessayez.';
+  } finally {
+    btn.disabled = false;
+    setTimeout(() => { status.textContent = ''; }, 6000);
+  }
 });
 
 // ── Utility ──────────────────────────────────────────────────
