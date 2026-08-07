@@ -1,0 +1,7 @@
+# Fichiers système
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Scripts de génération (pas nécessaires en ligne)
+*.py
