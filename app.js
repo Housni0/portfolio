@@ -81,6 +81,13 @@ const ALL_PROJECTS = [
     screenshot: 'screenshots/boutique.png',
     link: null,
   },
+  {
+    name: 'Worldwide-Weather-Watcher',
+    description: 'Station météo embarquée sur microcontrôleur en C : lecture de capteurs, stockage sur carte SD, configuration via console série. Projet de groupe réalisé avec PlatformIO.',
+    language: 'C',
+    screenshot: null,
+    link: 'https://github.com/Housni0/Worldwide-Weather-Watcher',
+  },
 ];
 
 // ── Render projects ───────────────────────────────────────────
